@@ -1,25 +1,57 @@
 public class LunchAccount 
 {
-    private int id = 1000;
+    private static int id = 1000;
     int i = 0;
     private double balance = 0;
-    private double price;
     private int moneyAdders = 0;
+    private int boughtLunches = 0;
+    private double moneySpent = 0;
+    private String student = "";
+    private boolean hasAdded = false;
 
     public LunchAccount(String student, double startBalance) {
         this.balance = startBalance;
         this.student = student;
+        this.id = id;
+        id++;
     }
 
-    public addMoney(money) {
-        this.balance = balance + money;
-        if (moneyAdders <= 100) {
-            this.balance += 20;
-            moneyAdders += 1;
+    public void addMoney(double money) {
+        if (!hasAdded) {
+            moneyAdders ++;
+            this.hasAdded = true;
+            if (moneyAdders <= 100) {
+                this.balance += 20;
+            }
         }
+        this.balance = balance + money;
     }
 
-    public order (String item1, String item2, String item3) {
-
+    public boolean order(double price) {
+        if (price <= balance) 
+        {
+            balance -= price;
+            moneySpent += price;
+            boughtLunches++;
+            return true;
+        }
+        return false;
     }
+
+    public double getBalance(){
+        return balance;
+    }
+
+    public int getLunches(){
+        return boughtLunches;
+    }
+
+    public double getSpent() {
+        return moneySpent;
+    }
+
+    public int getID() {
+        return id;
+    }
+
 }   
